@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/ITCR_DatosII_ProyectoI_Server.dir/src/C++/main.cpp.o CMakeFiles/ITCR_DatosII_ProyectoI_Server.dir/src/C++/mServer.cpp.o CMakeFiles/ITCR_DatosII_ProyectoI_Server.dir/src/DataStructures/Node.cpp.o CMakeFiles/ITCR_DatosII_ProyectoI_Server.dir/src/DataStructures/LinkedList.cpp.o  -o ITCR_DatosII_ProyectoI_Server 

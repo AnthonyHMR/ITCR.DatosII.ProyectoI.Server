@@ -1,3 +1,0 @@
-/home/anthony/Documents/RepositoriosDatos2/ITCR.DatosII.ProyectoI.Server/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/anthony/Documents/RepositoriosDatos2/ITCR.DatosII.ProyectoI.Server/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/anthony/Documents/RepositoriosDatos2/ITCR.DatosII.ProyectoI.Server/cmake-build-debug/CMakeFiles/ITCR_DatosII_ProyectoI_Server.dir
