@@ -89,7 +89,7 @@ int mServer::runServer() {
         getMessage();
 
         // Send message
-        sendMessage("message");
+        sendMessage("Recibido");
     }
 
     endRun();
@@ -101,9 +101,6 @@ void mServer::getMessage() {
 }
 
 void mServer::sendMessage(string message) {
-    // Enter lines of text
-    cout << "> ";
-    getline(cin, message);
 
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {
