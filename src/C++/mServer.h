@@ -18,6 +18,7 @@ public:
     void requestWriter(string message);
     void sendMessage(string message);
     void requestReader(ifstream JsonRequest);
+    MemoryMap *memoryMap = new MemoryMap(size);
 private:
     void endRun();
     int port;
