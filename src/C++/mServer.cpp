@@ -7,6 +7,8 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <string>
+#include <fstream>
+#include <iostream>
 
 using namespace std;
 
@@ -96,8 +98,9 @@ int mServer::runServer() {
 }
 
 void mServer::getMessage() {
-    cout << "Received: \n" << string(buf, 0, bytesRecv) << endl;
-
+    string received = string(buf, 0, bytesRecv);
+    requestWriter(received);
+    cout << "Received: \n" << received << endl;
 }
 
 void mServer::sendMessage(string message) {
@@ -108,6 +111,33 @@ void mServer::sendMessage(string message) {
     }
 }
 
+void mServer::requestWriter(string message) {
+    json jsonReader = json::parse(message);
+    //ofstream writeJson("../petitions.json");
+    //writeJson << std::setw(4) << j_complete << std::endl;
+    jsonReader.at("dataType").get_to(this->currentRequest->dataType);
+    jsonReader.at("label").get_to(this->currentRequest->label);
+    jsonReader.at("expression").get_to(this->currentRequest->expression);
+    jsonReader.at("value").get_to(this->currentRequest->value);
+    //ifstream i("../petitions.json");
+    //requestReader(i);
+    cout << "Object request generated from received message:\n"<<
+            "dataType: " + this->currentRequest->getDataType() + "\n"<<
+            "label: " + this->currentRequest->getLabel() + "\n"<<
+            "expression: " + this->currentRequest->getExpression() + "\n"<<
+            "value: " + this->currentRequest->getValue() + "\n"<<endl;
+
+}
+
+void mServer::requestReader(ifstream JsonRequest) {
+    json jsonReader;
+    JsonRequest >> jsonReader;
+    jsonReader.at("dataType").get_to(this->currentRequest->dataType);
+    jsonReader.at("label").get_to(this->currentRequest->label);
+    jsonReader.at("expression").get_to(this->currentRequest->expression);
+    jsonReader.at("value").get_to(this->currentRequest->value);
+
+}
 void mServer::endRun() {
     // Close socket
     close(clientSocket);
