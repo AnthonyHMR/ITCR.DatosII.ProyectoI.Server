@@ -4,6 +4,8 @@
 
 #include "MemoryMap.h"
 
+#include <fstream>
+
 void* MemoryMap::getBlock(){
     return this->block;
 }
@@ -13,13 +15,32 @@ void MemoryMap::updateCounter(){
 int MemoryMap::getCounter(){
     return this->counter;
 }
+void MemoryMap::setResults(void *memoryAdress, string label, string value, string references) {
+    json resultsJson;
+    resultsJson["memoryAdress"] = *static_cast<std::string*>(memoryAdress);
+    resultsJson["label"] = label;
+    resultsJson["value"] = value;
+    resultsJson["references"] = references;
+
+    ofstream writeResults("../results.json");
+    writeResults<< std::setw(4) << resultsJson << std::endl;
+}
+
+string MemoryMap::getResults() {
+    std::ifstream readResults("../results.json");
+    json resultsJson;
+    readResults >> resultsJson;
+
+    return to_string(resultsJson);
+}
+
 void MemoryMap::placePetition(Request request) {
     if (request.getDataType() == "int"){
         stringstream toInt(request.getValue());
         if (this->getCounter() < 1){
-
             toInt >> *a_initializer;
             cout << "Address 1: " << &a_initializer << "  Value: " << *a_initializer << "\n"<< endl;
+            setResults(&a_initializer, request.getLabel(), request.getValue(), "1");
             this->updateCounter();
         } else{
 

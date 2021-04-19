@@ -9,14 +9,18 @@
 #include <sstream>
 #include <iostream>
 #include <string>
+#include <nlohmann/json.hpp>
+#include <iomanip>
 
 using namespace std;
+using json = nlohmann::json;
 
 class MemoryMap {
 private:
     void *block;
     int * a_initializer;
     int counter = 0;
+    void setResults(void*, string, string, string);
 public:
     MemoryMap(int memorySize){
         block = malloc(memorySize);
@@ -26,7 +30,7 @@ public:
     void updateCounter();
     int getCounter();
     void placePetition(Request newRequest);
-
+    string getResults();
 };
 
 

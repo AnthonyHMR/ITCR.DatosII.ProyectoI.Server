@@ -8,7 +8,6 @@
 #include <string.h>
 #include <string>
 #include <fstream>
-#include <iostream>
 
 using namespace std;
 
@@ -91,7 +90,7 @@ int mServer::runServer() {
         getMessage();
 
         // Send message
-        sendMessage("Recibido");
+        sendMessage(memoryMap->getResults());
     }
 
     endRun();
