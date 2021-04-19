@@ -15,9 +15,9 @@ void MemoryMap::updateCounter(){
 int MemoryMap::getCounter(){
     return this->counter;
 }
-void MemoryMap::setResults(void *memoryAdress, string label, string value, string references) {
+void MemoryMap::setResults(void *memoryAddress, string label, string value, string references) {
     json resultsJson;
-    resultsJson["memoryAdress"] = *static_cast<std::string*>(memoryAdress);
+    resultsJson["memoryAddress"] = *static_cast<std::string*>(memoryAddress);
     resultsJson["label"] = label;
     resultsJson["value"] = value;
     resultsJson["references"] = references;
