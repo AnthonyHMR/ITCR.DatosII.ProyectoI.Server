@@ -2,18 +2,19 @@
 #define ITCR_DATOSII_PROYECTOI_SERVER_JSONPARSER_H
 
 #include <string>
+#include <nlohmann/json.hpp>
+#include <iomanip>
 
 using namespace std;
+using json = nlohmann::json;
 
 class jsonParser {
 public:
-    jsonParser(string jAddress, int nObjects);
+    jsonParser();
     ~jsonParser();
-    void writeJson(void*, string, string, string);
     string readJson();
-private:
-    string address;
-    int objects;
+protected:
+    void writeJson(void*, string, string, string);
 };
 
 

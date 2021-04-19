@@ -90,7 +90,7 @@ int mServer::runServer() {
         getMessage();
 
         // Send message
-        sendMessage(memoryMap->getResults());
+        sendMessage(memoryMap->readJson());
     }
 
     endRun();

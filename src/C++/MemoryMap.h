@@ -11,18 +11,19 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <iomanip>
+#include "jsonParser.h"
 
 using namespace std;
 using json = nlohmann::json;
 
-class MemoryMap {
+class MemoryMap : public jsonParser{
 private:
     void *block;
     int * a_initializer;
     int counter = 0;
-    void setResults(void*, string, string, string);
+    void *memoryAddress;
 public:
-    MemoryMap(int memorySize){
+    MemoryMap(int memorySize) {
         block = malloc(memorySize);
         a_initializer = (int *)block;
     }
@@ -30,7 +31,6 @@ public:
     void updateCounter();
     int getCounter();
     void placePetition(Request newRequest);
-    string getResults();
 };
 
 
