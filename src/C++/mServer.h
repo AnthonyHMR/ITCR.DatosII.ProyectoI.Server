@@ -19,6 +19,7 @@ public:
     void sendMessage(string message);
     void requestReader(ifstream JsonRequest);
     MemoryMap *memoryMap = new MemoryMap(size);
+    int cont = 0;
 private:
     void endRun();
     int port;
@@ -27,6 +28,8 @@ private:
     int clientSocket;
     int bytesRecv;
     Request *currentRequest = new Request();
+
+    void updateJsonFIle(const json &jsonReader) const;
 };
 
 #endif //ITCR_DATOSII_PROYECTOI_SERVER_MSERVER_H

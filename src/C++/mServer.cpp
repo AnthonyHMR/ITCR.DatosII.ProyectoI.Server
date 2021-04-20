@@ -111,16 +111,25 @@ void mServer::sendMessage(string message) {
 }
 
 void mServer::requestWriter(string message) {
-    json jsonReader = json::parse(message);
-    ofstream writeJson("../petitions.json");
-    writeJson << std::setw(4) << jsonReader << std::endl;
+
+    json jsonReader = json::parse(message + "\n");
     jsonReader.at("dataType").get_to(this->currentRequest->dataType);
     jsonReader.at("label").get_to(this->currentRequest->label);
     jsonReader.at("expression").get_to(this->currentRequest->expression);
     jsonReader.at("value").get_to(this->currentRequest->value);
-    //ifstream i("../petitions.json");
-    //requestReader(i);
+    updateJsonFIle(jsonReader);
     this->memoryMap->placePetition(*currentRequest);
+}
+
+void mServer::updateJsonFIle(const json &jsonReader) const {
+    
+    ifstream currentFile("../requests.json");
+    json currentObject;
+    currentFile >>currentObject;
+    currentObject["Requests"] += jsonReader;
+    ofstream writeJson;
+    writeJson.open("../requests.json");
+    writeJson <<currentObject;
 }
 
 void mServer::requestReader(ifstream JsonRequest) {
