@@ -14,7 +14,7 @@ public:
     ~jsonParser();
     string readJson();
 protected:
-    void writeJson(void*, string, string, string);
+    void writeJson(string mem, string, string, string);
 };
 
 

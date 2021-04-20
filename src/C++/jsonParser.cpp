@@ -3,9 +3,10 @@
 
 jsonParser::jsonParser() {}
 
-void jsonParser::writeJson(void *memoryAddress, string label, string value, string references) {
+void jsonParser::writeJson(string memoryAddress, string label, string value, string references) {
     json resultsJson;
-    resultsJson["memoryAddress"] = *static_cast<std::string*>(memoryAddress);
+
+    resultsJson["memoryAddress"] = memoryAddress;
     resultsJson["label"] = label;
     resultsJson["value"] = value;
     resultsJson["references"] = references;

@@ -19,21 +19,19 @@ int MemoryMap::getCounter(){
 void MemoryMap::placePetition(Request request) {
     if (request.getDataType() == "int"){
         stringstream toInt(request.getValue());
-        if (this->getCounter() < 1){
-            toInt >> *a_initializer;
-            memoryAddress = &a_initializer;
-            cout << "Address 1: " << &a_initializer << "  Value: " << *a_initializer << "\n"<< endl;
-            this->updateCounter();
-        } else{
-            int a;
-            toInt >> a;
-            *(a_initializer + this->getCounter()) = a;
-            memoryAddress = &(*(a_initializer + this->getCounter()));
-            cout << "Address ++: " << &(*(a_initializer + this->getCounter())) << "  Value: " << *(a_initializer + this->getCounter()) << "\n"<< endl;
-            this->updateCounter();
-        }
+        toInt >> *(a_initializer + this->getCounter());
+
+        cout << "Address ++: " << &(*(a_initializer + this->getCounter())) << "  Value: " << *(a_initializer + this->getCounter()) << "\n"<< endl;
+
+        std::ostringstream mem;
+        mem << &(*(a_initializer + this->getCounter()));
+        std::string address = mem.str();
+
+        jsonParser::writeJson(address, request.getLabel(), request.getValue(), "1");
+        this->updateCounter();
+
+
     }
-    jsonParser::writeJson(memoryAddress, request.getLabel(), request.getValue(), "1");
     /**
      * In this method the memory block must manage where is going to
      * place the petition made by the client and has to update the count so that
