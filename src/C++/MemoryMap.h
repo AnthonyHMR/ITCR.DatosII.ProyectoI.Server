@@ -18,18 +18,23 @@ using json = nlohmann::json;
 
 class MemoryMap : public jsonParser{
 private:
-    void *block;
-    int * a_initializer;
+    void *block = nullptr;
+    int * a_initializer = nullptr;
+    char * char_init = nullptr;
     int counter = 0;
-    void *memoryAddress;
+    int char_counter = 1;
+
 public:
     MemoryMap(int memorySize) {
         block = malloc(memorySize);
         a_initializer = (int *)block;
+        char_init = (char *)block;
     }
     void * getBlock();
     void updateCounter();
+    void updateCharCounter();
     int getCounter();
+    int getCharCounter();
     void placePetition(Request newRequest);
 };
 
