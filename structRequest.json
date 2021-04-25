@@ -1,0 +1,5 @@
+{
+  "dataType": "struct",
+  "label": "claseA",
+  "value": [{"dataType": "int", "label": "x"}, {"dataType": "int", "label": "y"}]
+}

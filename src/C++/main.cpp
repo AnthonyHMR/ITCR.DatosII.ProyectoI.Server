@@ -4,10 +4,17 @@
 #include "../DataStructures/LinkedList.h"
 
 int main() {
-    mServer *server = new mServer(54000, 12345);
+    mServer *server = new mServer(54000, 1024);
     server->runServer();
+    /*    ifstream structfile("../structRequest.json");
+    json structJson;
+    structfile >> structJson;
+    //iterate over struct json
+    for (auto &el : structJson["value"].items()) {
+        cout << el.value()["label"]<< "\n";
+    }
 
-    /*
+
     ofstream cout("filename.txt");
     string name = "Juan";
     cout << "What is your name? ";

@@ -117,7 +117,10 @@ void mServer::requestWriter(string message) {
     jsonReader.at("label").get_to(this->currentRequest->label);
     jsonReader.at("expression").get_to(this->currentRequest->expression);
     jsonReader.at("value").get_to(this->currentRequest->value);
-    updateJsonFIle(jsonReader);
+    if (jsonReader.at("dataType") == "struct"){
+        //do expected parsing for struct json file
+    }
+    else updateJsonFIle(jsonReader);
     this->memoryMap->placePetition(*currentRequest);
 }
 
@@ -144,6 +147,7 @@ void mServer::requestReader(ifstream JsonRequest) {
 void mServer::endRun() {
     // Close socket
     close(clientSocket);
+
 }
 
 mServer::~mServer() {
