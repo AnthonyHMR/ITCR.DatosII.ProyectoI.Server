@@ -99,7 +99,6 @@ int mServer::runServer() {
 void mServer::getMessage() {
     string received = string(buf, 0, bytesRecv);
     requestWriter(received);
-    //cout << "Received: \n" << received << endl;
 }
 
 void mServer::sendMessage(string message) {
@@ -116,7 +115,11 @@ void mServer::requestWriter(string message) {
     jsonReader.at("dataType").get_to(this->currentRequest->dataType);
     jsonReader.at("label").get_to(this->currentRequest->label);
     jsonReader.at("expression").get_to(this->currentRequest->expression);
-    jsonReader.at("value").get_to(this->currentRequest->value);
+    if (jsonReader["dataType"] == "struct") {
+        cout << "Received: \n" << message << endl;
+    } else {
+        jsonReader.at("value").get_to(this->currentRequest->value);
+    }
     if (jsonReader.at("dataType") == "struct"){
         //do expected parsing for struct json file
     }
