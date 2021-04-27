@@ -28,15 +28,6 @@ void Request::setExpression(const string &expression) {
     Request::expression = expression;
 }
 
-
-bool Request::isReference1() const {
-    return isReference;
-}
-
-void Request::setIsReference(bool isReference) {
-    Request::isReference = isReference;
-}
-
 const string &Request::getValue() const {
     return value;
 }

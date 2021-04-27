@@ -6,21 +6,6 @@
 
 #include <fstream>
 
-void* MemoryMap::getBlock(){
-    return this->block;
-}
-void MemoryMap::updateCounter(){
-    this->counter ++;
-}
-int MemoryMap::getCounter(){
-    return this->counter;
-}
-void MemoryMap::updateCharCounter(){
-    this->char_counter++;
-}
-int MemoryMap::getCharCounter(){
-    return this->char_counter;
-}
 
 void MemoryMap::placePetition(Request request) {
     ifstream structfile ("../structRequest.json");
@@ -47,11 +32,7 @@ void MemoryMap::placePetition(Request request) {
     else if (request.getDataType() == "struct"){
         structAllocator(request);
     }
-    /**
-     * In this method the memory block must manage where is going to
-     * place the petition made by the client and has to update the count so that
-     * the next petitions is located right after the previous one
-     */
+
 }
 
 void MemoryMap::floatAllocator(const Request &request) {
@@ -63,7 +44,6 @@ void MemoryMap::floatAllocator(const Request &request) {
     mem << &(*(float_init + index));
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1");
-    updateCounter();
     data_index[3][1]++;
 }
 
@@ -88,7 +68,6 @@ void MemoryMap::doubleAllocator(const Request &request) {
     mem << &(*(double_init + index));
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1");
-    updateCounter();
     data_index[5][1]++;
 }
 
@@ -101,7 +80,6 @@ void MemoryMap::longAllocator(const Request &request) {
     mem << &(*(long_init + index));
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1");
-    updateCounter();
     data_index[4][1]++;
 }
 
@@ -114,7 +92,6 @@ void MemoryMap::charAllocator(const Request &request) {
     mem << (void*)&(*(char_init + index));
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1");
-    updateCharCounter();
     data_index[0][1]++;
 }
 
@@ -127,7 +104,6 @@ void MemoryMap::intAllocator(const Request &request) {
     mem << &(*(a_initializer + index));
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1");
-    updateCounter();
     data_index[2][1]++;
 
 }
@@ -164,7 +140,12 @@ void MemoryMap::structAllocator(const Request &request) {
         mem << &claseA;
     }
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), reinterpret_cast<const char *>(ref_counter));
+    string count = to_string(ref_counter);
+    string label = structJson["label"];
+    cout << "Struct address:" + address << endl;
+    cout << "\n Struct label:" << label << endl;
+    cout << "\n Struct ref count:" +  count << endl;
+    writeJson(address, label, "/", count);
 }
 /*    struct {
         int x;
@@ -174,6 +155,5 @@ void MemoryMap::structAllocator(const Request &request) {
 
 
 void MemoryMap::freeStorage() {
-
     free (this->block);
 }

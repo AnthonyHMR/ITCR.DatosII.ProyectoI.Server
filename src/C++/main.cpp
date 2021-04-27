@@ -13,7 +13,12 @@ int main() {
     for (auto &el : structJson["value"].items()) {
         cout << el.value()["label"]<< "\n";
     }
-
+int r = 23;
+int a = 22;
+struct{
+	int x;
+	int y;
+}claseA;
 
     ofstream cout("filename.txt");
     string name = "Juan";

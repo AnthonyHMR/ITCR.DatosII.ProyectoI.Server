@@ -116,14 +116,15 @@ void mServer::requestWriter(string message) {
     jsonReader.at("label").get_to(this->currentRequest->label);
     jsonReader.at("expression").get_to(this->currentRequest->expression);
     if (jsonReader["dataType"] == "struct") {
+        ofstream writeStruct("../structRequest.json");
+        writeStruct << jsonReader;
         cout << "Received: \n" << message << endl;
+        this->currentRequest->value = "0";
     } else {
         jsonReader.at("value").get_to(this->currentRequest->value);
+        updateJsonFIle(jsonReader);
     }
-    if (jsonReader.at("dataType") == "struct"){
-        //do expected parsing for struct json file
-    }
-    else updateJsonFIle(jsonReader);
+
     this->memoryMap->placePetition(*currentRequest);
 }
 
@@ -138,15 +139,6 @@ void mServer::updateJsonFIle(const json &jsonReader) const {
     writeJson <<currentObject;
 }
 
-void mServer::requestReader(ifstream JsonRequest) {
-    json jsonReader;
-    JsonRequest >> jsonReader;
-    jsonReader.at("dataType").get_to(this->currentRequest->dataType);
-    jsonReader.at("label").get_to(this->currentRequest->label);
-    jsonReader.at("expression").get_to(this->currentRequest->expression);
-    jsonReader.at("value").get_to(this->currentRequest->value);
-
-}
 void mServer::endRun() {
     // Close socket
     close(clientSocket);
@@ -154,5 +146,5 @@ void mServer::endRun() {
 }
 
 mServer::~mServer() {
-
+    memoryMap->freeStorage();
 }

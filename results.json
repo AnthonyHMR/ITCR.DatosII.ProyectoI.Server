@@ -1,6 +1,6 @@
 {
-    "label": "a",
-    "memoryAddress": "0x56020c67cf60",
-    "references": "1",
-    "value": "90"
+    "label": "claseA",
+    "memoryAddress": "0x7fff867699e0",
+    "references": "2",
+    "value": "/"
 }
