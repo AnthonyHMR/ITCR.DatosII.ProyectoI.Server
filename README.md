@@ -18,4 +18,4 @@ sudo apt update -y
 sudo apt install -y libboost-all-dev
 ````
 
-Doxygen doc is in: <file:///C:/Users/HP/Desktop/TEC/VII%20Semestre/Algoritmos%20y%20Estructuras%20de%20Datos%20II/ITCR.DatosII.ProyectoI.Server/doc/html/index.html>
+[Doxygen documentation link](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoI.Server/blob/main/doc/html.zip)
