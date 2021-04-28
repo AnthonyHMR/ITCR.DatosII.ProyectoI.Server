@@ -17,7 +17,7 @@
 using namespace std;
 using json = nlohmann::json;
 /**
- * @class A Memory Map class is implemented for the allocation of the following data types:
+ * @class MemoryMap class is implemented for the allocation of the following data types:
  * Int: integers with size of 4 bytes
  * Char: characters with size of 1 byte
  * Long: long numbers with size of 8 bytes
@@ -38,6 +38,10 @@ private:
     int maxSize = 0;
     int data_index[6][2] = {{1, 0},{2, 0},{4, 0},{4, 0},{8, 0},{8, 0}};
 public:
+    /**
+     * @brief Constructor that initializes all the pointers in the memory block
+     * @param memorySize is the amount of bytes that the memory block needs
+     */
     MemoryMap(int memorySize) {
         maxSize = memorySize;
         block = malloc(memorySize);

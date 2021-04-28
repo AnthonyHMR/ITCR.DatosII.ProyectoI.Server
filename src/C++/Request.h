@@ -8,7 +8,7 @@
 
 using namespace std;
 /**
- * @class A request object represents the data types info sended by the client
+ * @class Request object represents the data types info sended by the client
  */
 class Request {
 public:
