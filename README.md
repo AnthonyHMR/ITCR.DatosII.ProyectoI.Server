@@ -1,4 +1,10 @@
-# ITCR.DatosII.ProyectoI.Server
+![LogoTEC](https://www.tec.ac.cr/sites/default/files/media/branding/logo-tec.png)
+# Computer Engineering
+
+### Students:
+#### Anthony Montero
+#### Juan Peña
+## 1st Project - SI 2021
 A program called mserver is executed, indicating as parameters the port on which it is listening and the size in bytes of the total memory.
 ## Server side of the project.
 The server performs a single total memory malloc. The server has an internal map of the entire memory block. For example, at startup you can reserve 10MB of real memory. With each request received from C !, the server handles offsets to determine the position of each variable in C! within the actual memory block.
@@ -18,4 +24,5 @@ sudo apt update -y
 sudo apt install -y libboost-all-dev
 ````
 
-[Doxygen documentation link](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoI.Server/blob/main/doc/html.zip)
+[Doxygen documentation link](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoI.Server/blob/main/doc/html.zip) <br/>
+[Github wiki documentation](https://github.com/AnthonyHMR/ITCR.DatosII.ProyectoI.Server/wiki)
