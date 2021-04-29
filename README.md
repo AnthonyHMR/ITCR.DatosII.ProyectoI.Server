@@ -1,24 +1,24 @@
 ![LogoTEC](https://www.tec.ac.cr/sites/default/files/media/branding/logo-tec.png)
-# Computer Engineering
-
-### Students:
+# Área Académica de Ingeniería en Computadores
+## Algoritmos y Estructuras de Datos II
+### Profesor:
+#### Antonio González Torres
+### Estudiantes:
 #### Anthony Montero
 #### Juan Peña
-## 1st Project - SI 2021
-A program called mserver is executed, indicating as parameters the port on which it is listening and the size in bytes of the total memory.
-## Server side of the project.
-The server performs a single total memory malloc. The server has an internal map of the entire memory block. For example, at startup you can reserve 10MB of real memory. With each request received from C !, the server handles offsets to determine the position of each variable in C! within the actual memory block.
-The server listens for requests from C! sent by the IDE in JSON format. When the IDE C! send a request must indicate at least the type of data, the name of the variable and the size to be reserved. The server handles memory automatically. That is, C! you never have to free memory or request to create it. 
-The server keeps the reference count and every so often it executes the garbage collector that eliminates the memory spaces that are not referenced.
+## Proyecto I - SI 2021
+Se trata de un programa llamado mserver, indicando como parámetros el puerto en el que está escuchando y el tamaño en bytes de la memoria total.
+## Acerca del servidor
+El servidor realiza un solo malloc de memoria total. El servidor tiene un mapa interno de todo el bloque de memoria. Por ejemplo, al inicio, puede reservar 10 MB de memoria real. Con cada solicitud recibida de C!, El servidor maneja las compensaciones para determinar la posición de cada variable en C! dentro del bloque de memoria real. ¡El servidor escucha las solicitudes de C! enviado por el IDE en formato JSON. Cuando el IDE C! enviar una solicitud debe indicar al menos el tipo de dato, el nombre de la variable y el tamaño a reservar. El servidor maneja la memoria automáticamente. ¡Es decir, C! nunca tendrá que liberar memoria ni solicitar crearla. El servidor mantiene el recuento de referencias y cada cierto tiempo ejecuta el recolector de basura que elimina los espacios de memoria a los que no se hace referencia.
 
-## Libraries needed
-This project runs on Ubuntu C++
-First a JSON files handling library is needed. It could be install with the following commands:
+## Bibliotecas necesarias 
+Este proyecto fue realizado en Ubuntu(Linux) en el lenguaje C++
+Primero se necesita una biblioteca de manejo de archivos JSON. Se puede instalar con los siguientes comandos:
 ````
 sudo apt-get update
 sudo apt-get install nlohmann-json3-dev
 ````
-Also, the lib boost library is needed. It could be install with the following commands:
+Además, se necesita la biblioteca lib boost. Se puede instalar con los siguientes comandos:
 ````
 sudo apt update -y
 sudo apt install -y libboost-all-dev
