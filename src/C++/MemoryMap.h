@@ -14,6 +14,7 @@
 #include "jsonParser.h"
 #include "../DataStructures/LinkedList.h"
 #include <boost/lexical_cast.hpp>// for lexical_cast()
+#include "Logger.h"
 using namespace std;
 using json = nlohmann::json;
 /**
@@ -37,6 +38,9 @@ private:
     double * double_init = nullptr;
     int maxSize = 0;
     int data_index[6][2] = {{1, 0},{2, 0},{4, 0},{4, 0},{8, 0},{8, 0}};
+    Logger *logger_manager = new Logger();
+
+
 public:
     /**
      * @brief Constructor that initializes all the pointers in the memory block
@@ -57,6 +61,7 @@ public:
      * request object the server has received
      * @param newRequest is the object most recently parsed in the server
      */
+    Logger *getLoggerManager() const;
     void placePetition(Request newRequest);
     /**
      * @brief In this method the memory block must manage where is going to

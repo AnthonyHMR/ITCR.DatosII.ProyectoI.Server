@@ -6,8 +6,10 @@
 #include <iomanip>
 #include "MemoryMap.h"
 #include "Request.h"
+#include "spdlog/spdlog.h"
 using json = nlohmann::json;
 using namespace std;
+using namespace spdlog;
 /**
  * @class Server that manages the memory block reserved for the IDE client requests.
  * It can receive requests for the allocation of different data types and can send

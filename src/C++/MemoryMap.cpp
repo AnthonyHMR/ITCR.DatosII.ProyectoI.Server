@@ -13,24 +13,31 @@ void MemoryMap::placePetition(Request request) {
     structfile >> structJson;
     if (request.getDataType() == "int"){
         intAllocator(request);
+        getLoggerManager()->my_logger->info("An int data type has been allocated");
     }
     else if (request.getDataType() == "char"){
         charAllocator(request);
+        getLoggerManager()->my_logger->info("A char data type has been allocated");
     }
     else if (request.getDataType() == "long"){
         longAllocator(request);
+        getLoggerManager()->my_logger->info("A long data type has been allocated");
     }
     else if (request.getDataType() == "short"){
         shortAllocator(request);
+        getLoggerManager()->my_logger->info("A short data type has been allocated");
     }
     else if (request.getDataType() == "double"){
         doubleAllocator(request);
+        getLoggerManager()->my_logger->info("A double data type has been allocated");
     }
     else if (request.getDataType() == "float"){
         floatAllocator(request);
+        getLoggerManager()->my_logger->info("A float data type has been allocated");
     }
     else if (request.getDataType() == "struct"){
         structAllocator(request);
+        getLoggerManager()->my_logger->info("A struct data type has been allocated");
     }
 
 }
@@ -93,6 +100,7 @@ void MemoryMap::charAllocator(const Request &request) {
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1");
     data_index[0][1]++;
+
 }
 
 void MemoryMap::intAllocator(const Request &request) {
@@ -146,6 +154,7 @@ void MemoryMap::structAllocator(const Request &request) {
     cout << "\n Struct label:" << label << endl;
     cout << "\n Struct ref count:" +  count << endl;
     writeJson(address, label, "/", count);
+    getLoggerManager()->my_logger->warn("Struct data type allocated outside memory block");
 }
 /*    struct {
         int x;
@@ -156,4 +165,8 @@ void MemoryMap::structAllocator(const Request &request) {
 
 void MemoryMap::freeStorage() {
     free (this->block);
+}
+
+Logger *MemoryMap::getLoggerManager() const {
+    return logger_manager;
 }
