@@ -96,7 +96,7 @@ int mServer::runServer() {
 
         // Send message
         sendMessage(memoryMap->readJson());
-
+        memoryMap->getLoggerManager()->readLog();
 
     }
 
