@@ -111,6 +111,7 @@ void MemoryMap::intAllocator(const Request &request) {
     mem << &(*(a_initializer + index));
     string address = mem.str();
     writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
+    logger_manager->clearLogger();
     data_index[2][1]++;
 }
 

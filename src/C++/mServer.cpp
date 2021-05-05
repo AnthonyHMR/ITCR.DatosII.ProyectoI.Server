@@ -124,6 +124,8 @@ void mServer::requestWriter(string message) {
         writeStruct << jsonReader;
         cout << "Received: \n" << message << endl;
         this->currentRequest->value = "0";
+    } else if (jsonReader["dataType"] == "print") {
+        cout << "Received: \n" << message << endl;
     } else {
         jsonReader.at("value").get_to(this->currentRequest->value);
         updateJsonFIle(jsonReader);
