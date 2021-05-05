@@ -15,6 +15,7 @@
 #include "../DataStructures/LinkedList.h"
 #include <boost/lexical_cast.hpp>// for lexical_cast()
 #include "Logger.h"
+
 using namespace std;
 using json = nlohmann::json;
 /**
@@ -39,7 +40,6 @@ private:
     int maxSize = 0;
     int data_index[6][2] = {{1, 0},{2, 0},{4, 0},{4, 0},{8, 0},{8, 0}};
     Logger *logger_manager = new Logger();
-
 
 public:
     /**

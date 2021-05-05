@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Logger.h"
 
-void Logger::readLog(){
+basic_string<char> Logger::readLog(){
     std::ifstream currentLog("logs/logger.txt");
     if (currentLog) {
         currentLog.seekg(0, std::ios::end);
@@ -15,6 +15,12 @@ void Logger::readLog(){
         currentLog.read(&contents[0], len);
         logger_msg = contents;
     }
-    cout<<logger_msg;
 
+    cout<<logger_msg;
+    return logger_msg;
+}
+
+void Logger::clearLogger() {
+    std::ifstream currentLog("logs/logger.txt");
+    currentLog.clear();
 }

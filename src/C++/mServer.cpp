@@ -52,9 +52,8 @@ int mServer::runServer() {
         return -4;
     }
     else {
-        memoryMap->getLoggerManager()->my_logger->info("Welcome to C!");
-        string log_msg = memoryMap->getLoggerManager()->logger_msg;
-
+        //memoryMap->getLoggerManager()->my_logger->info("Welcome to C!");
+        //string log_msg = memoryMap->getLoggerManager()->logger_msg;
     }
 
     // Close the listening socket
@@ -96,7 +95,6 @@ int mServer::runServer() {
 
         // Send message
         sendMessage(memoryMap->readJson());
-        memoryMap->getLoggerManager()->readLog();
 
     }
 
@@ -117,7 +115,6 @@ void mServer::sendMessage(string message) {
 }
 
 void mServer::requestWriter(string message) {
-
     json jsonReader = json::parse(message + "\n");
     jsonReader.at("dataType").get_to(this->currentRequest->dataType);
     jsonReader.at("label").get_to(this->currentRequest->label);
@@ -149,7 +146,6 @@ void mServer::updateJsonFIle(const json &jsonReader) const {
 void mServer::endRun() {
     // Close socket
     close(clientSocket);
-
 }
 
 mServer::~mServer() {

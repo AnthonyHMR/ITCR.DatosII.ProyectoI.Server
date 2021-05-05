@@ -3,16 +3,17 @@
 
 jsonParser::jsonParser() {}
 
-void jsonParser::writeJson(string memoryAddress, string label, string value, string references) {
+void jsonParser::writeJson(string mem, string label, string value, string reference, basic_string<char> log) {
     json resultsJson;
 
-    resultsJson["memoryAddress"] = memoryAddress;
+    resultsJson["memoryAddress"] = mem;
     resultsJson["label"] = label;
     resultsJson["value"] = value;
-    resultsJson["references"] = references;
+    resultsJson["references"] = reference;
+    resultsJson["log"] = log;
 
     ofstream writeResults("../results.json");
-    writeResults<< std::setw(4) << resultsJson << std::endl;
+    writeResults<< std::setw(5) << resultsJson << std::endl;
 }
 
 string jsonParser::readJson() {

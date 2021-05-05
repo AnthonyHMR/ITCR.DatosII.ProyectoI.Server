@@ -17,6 +17,7 @@ using namespace spdlog;
  */
 class mServer {
 public:
+    void endRun();
     /**
      * @brief Constructor that has a port where the server is listening requests and a memory size
      * for the allocation of data
@@ -57,9 +58,9 @@ public:
      */
     void updateJsonFIle(const json &jsonReader) const;
 private:
-    void endRun();
     int port;
     int size;
+    bool flag = true;
     char buf[4096];
     int clientSocket;
     int bytesRecv;

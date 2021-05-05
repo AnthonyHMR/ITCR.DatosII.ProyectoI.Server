@@ -6,6 +6,7 @@
 int main() {
     mServer *server = new mServer(54000, 1024);
     server->runServer();
+
     /*    ifstream structfile("../structRequest.json");
     json structJson;
     structfile >> structJson;

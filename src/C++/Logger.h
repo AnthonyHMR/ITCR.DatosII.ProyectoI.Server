@@ -8,11 +8,13 @@
 #include "spdlog/sinks/basic_file_sink.h"
 #include <string>
 #include <fstream>
+
 using namespace std;
 using namespace spdlog;
 class Logger {
 public:
     shared_ptr<spdlog::logger>  my_logger;
+    void clearLogger();
     string logger_msg;
     Logger(){
         try
@@ -25,7 +27,7 @@ public:
             cout << "Log init failed: " << ex.what() << endl;
         }
     }
-    void readLog();
+    basic_string<char> readLog();
 };
 
 

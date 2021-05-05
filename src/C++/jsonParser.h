@@ -37,7 +37,7 @@ protected:
      * @param value is the data's value
      * @param reference is the data's number of reference count
      */
-    void writeJson(string mem, string label, string value, string reference);
+    void writeJson(string mem, string label, string value, string reference, basic_string<char>);
 };
 
 

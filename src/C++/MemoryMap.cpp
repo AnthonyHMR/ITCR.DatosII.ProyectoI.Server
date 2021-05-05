@@ -12,32 +12,32 @@ void MemoryMap::placePetition(Request request) {
     json structJson;
     structfile >> structJson;
     if (request.getDataType() == "int"){
-        intAllocator(request);
         getLoggerManager()->my_logger->info("An int data type has been allocated");
+        intAllocator(request);
     }
     else if (request.getDataType() == "char"){
-        charAllocator(request);
         getLoggerManager()->my_logger->info("A char data type has been allocated");
+        charAllocator(request);
     }
     else if (request.getDataType() == "long"){
         longAllocator(request);
         getLoggerManager()->my_logger->info("A long data type has been allocated");
     }
     else if (request.getDataType() == "short"){
-        shortAllocator(request);
         getLoggerManager()->my_logger->info("A short data type has been allocated");
+        shortAllocator(request);
     }
     else if (request.getDataType() == "double"){
-        doubleAllocator(request);
         getLoggerManager()->my_logger->info("A double data type has been allocated");
+        doubleAllocator(request);
     }
     else if (request.getDataType() == "float"){
-        floatAllocator(request);
         getLoggerManager()->my_logger->info("A float data type has been allocated");
+        floatAllocator(request);
     }
     else if (request.getDataType() == "struct"){
-        structAllocator(request);
         getLoggerManager()->my_logger->info("A struct data type has been allocated");
+        structAllocator(request);
     }
 
 }
@@ -50,7 +50,7 @@ void MemoryMap::floatAllocator(const Request &request) {
     ostringstream mem;
     mem << &(*(float_init + index));
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), "1");
+    writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
     data_index[3][1]++;
 }
 
@@ -62,7 +62,7 @@ void MemoryMap::shortAllocator(const Request &request) {
     ostringstream mem;
     mem << &(*(short_init + index));
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), "1");
+    writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
     data_index[1][1]++;
 }
 
@@ -74,7 +74,7 @@ void MemoryMap::doubleAllocator(const Request &request) {
     ostringstream mem;
     mem << &(*(double_init + index));
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), "1");
+    writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
     data_index[5][1]++;
 }
 
@@ -86,7 +86,7 @@ void MemoryMap::longAllocator(const Request &request) {
     ostringstream mem;
     mem << &(*(long_init + index));
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), "1");
+    writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
     data_index[4][1]++;
 }
 
@@ -98,9 +98,8 @@ void MemoryMap::charAllocator(const Request &request) {
     ostringstream mem;
     mem << (void*)&(*(char_init + index));
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), "1");
+    writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
     data_index[0][1]++;
-
 }
 
 void MemoryMap::intAllocator(const Request &request) {
@@ -111,10 +110,10 @@ void MemoryMap::intAllocator(const Request &request) {
     ostringstream mem;
     mem << &(*(a_initializer + index));
     string address = mem.str();
-    writeJson(address, request.getLabel(), request.getValue(), "1");
+    writeJson(address, request.getLabel(), request.getValue(), "1", logger_manager->readLog());
     data_index[2][1]++;
-
 }
+
 void MemoryMap::structAllocator(const Request &request) {
     int ref_counter = 0;
     ostringstream mem;
@@ -153,8 +152,8 @@ void MemoryMap::structAllocator(const Request &request) {
     cout << "Struct address:" + address << endl;
     cout << "\n Struct label:" << label << endl;
     cout << "\n Struct ref count:" +  count << endl;
-    writeJson(address, label, "/", count);
     getLoggerManager()->my_logger->warn("Struct data type allocated outside memory block");
+    writeJson(address, label, "/", count, logger_manager->readLog());
 }
 /*    struct {
         int x;
@@ -162,11 +161,10 @@ void MemoryMap::structAllocator(const Request &request) {
     } claseA;
     cout << "Struct address: "<< &claseA;*/
 
-
 void MemoryMap::freeStorage() {
     free (this->block);
 }
 
 Logger *MemoryMap::getLoggerManager() const {
-    return logger_manager;
+    return getLoggerManager();
 }
