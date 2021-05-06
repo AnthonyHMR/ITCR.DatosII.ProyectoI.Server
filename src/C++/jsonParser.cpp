@@ -14,6 +14,8 @@ void jsonParser::writeJson(string mem, string label, string value, string refere
 
     ofstream writeResults("../results.json");
     writeResults<< std::setw(5) << resultsJson << std::endl;
+
+    writeJsonBackup(resultsJson);
 }
 
 string jsonParser::readJson() {
@@ -22,6 +24,10 @@ string jsonParser::readJson() {
     readResults >> resultsJson;
 
     return to_string(resultsJson);
+}
+
+void jsonParser::writeJsonBackup(json entry) {
+    
 }
 
 jsonParser::~jsonParser() {

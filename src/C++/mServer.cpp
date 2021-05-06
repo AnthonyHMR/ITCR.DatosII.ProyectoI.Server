@@ -51,10 +51,6 @@ int mServer::runServer() {
         cerr << "Problem with client connecting!";
         return -4;
     }
-    else {
-        //memoryMap->getLoggerManager()->my_logger->info("Welcome to C!");
-        //string log_msg = memoryMap->getLoggerManager()->logger_msg;
-    }
 
     // Close the listening socket
     close(listening);

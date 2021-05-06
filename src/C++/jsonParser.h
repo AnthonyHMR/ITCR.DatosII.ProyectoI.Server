@@ -4,6 +4,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <iomanip>
+#include "../DataStructures/LinkedList.h"
 
 using namespace std;
 using json = nlohmann::json;
@@ -12,6 +13,8 @@ using json = nlohmann::json;
  * This data is the memory address, the data name, the data value and the data references count
  */
 class jsonParser {
+private:
+    void writeJsonBackup(json);
 public:
     /**
      * @brief Class constructor

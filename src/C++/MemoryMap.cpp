@@ -167,5 +167,5 @@ void MemoryMap::freeStorage() {
 }
 
 Logger *MemoryMap::getLoggerManager() const {
-    return getLoggerManager();
+    return logger_manager;
 }

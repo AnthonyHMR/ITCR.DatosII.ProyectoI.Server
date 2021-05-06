@@ -17,7 +17,6 @@ using namespace spdlog;
  */
 class mServer {
 public:
-    void endRun();
     /**
      * @brief Constructor that has a port where the server is listening requests and a memory size
      * for the allocation of data
@@ -66,7 +65,7 @@ private:
     int bytesRecv;
     MemoryMap *memoryMap = new MemoryMap(size);
     Request *currentRequest = new Request();
-
+    void endRun();
 };
 
 #endif //ITCR_DATOSII_PROYECTOI_SERVER_MSERVER_H
