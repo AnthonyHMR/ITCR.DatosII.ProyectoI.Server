@@ -39,7 +39,27 @@ void MemoryMap::placePetition(Request request) {
         getLoggerManager()->my_logger->info("A struct data type has been allocated");
         structAllocator(request);
     }
-
+    else if (request.getDataType() == "print"){
+        ifstream requestsFile("../requests.json");
+        json allRequests;
+        requestsFile >> allRequests;
+        int lenValue = request.getValue().length();
+        if (lenValue > 1){
+            writeJson("print", request.getValue(), "null", "-", "null");
+            //Print que el ide harìa
+            cout << "A print request from IDE";
+            cout << request.getValue() << "\n";
+        }
+        else{
+            for (auto &el : allRequests["Request"].items()) {
+                if (el.value()["label"] == request.getValue()){
+                    writeJson("print", request.getValue(), el.value()["value"], "-", "null");
+                    cout << "A print request from IDE";
+                    cout << el.value()["value"] << "\n";
+                }
+            }
+        }
+    }
 }
 
 void MemoryMap::floatAllocator(const Request &request) {
