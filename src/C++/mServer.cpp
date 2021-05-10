@@ -103,7 +103,12 @@ void mServer::getMessage() {
 }
 
 void mServer::sendMessage(string message) {
-
+    ofstream reset("../cmake-build-debug/logs/logger.txt");
+    reset.clear();
+    if (currentRequest->getReset() == "true") {
+        //ofstream reset("../cmake-build-debug/logs/logger.txt");
+        //reset.clear();
+    }
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {
         cout << "Could not send to client!\r\n";
@@ -115,18 +120,16 @@ void mServer::requestWriter(string message) {
     jsonReader.at("dataType").get_to(this->currentRequest->dataType);
     jsonReader.at("label").get_to(this->currentRequest->label);
     jsonReader.at("expression").get_to(this->currentRequest->expression);
+    jsonReader.at("reset").get_to(this->currentRequest->reset);
     if (jsonReader["dataType"] == "struct") {
         ofstream writeStruct("../structRequest.json");
         writeStruct << jsonReader;
         cout << "Received: \n" << message << endl;
         this->currentRequest->value = "0";
-    } else if (jsonReader["dataType"] == "print") {
-        cout << "Received: \n" << message << endl;
     } else {
         jsonReader.at("value").get_to(this->currentRequest->value);
         updateJsonFIle(jsonReader);
     }
-
     this->memoryMap->placePetition(*currentRequest);
 }
 

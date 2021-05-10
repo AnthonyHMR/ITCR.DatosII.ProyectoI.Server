@@ -48,12 +48,22 @@ public:
      * Request value setter
      */
     void setValue(const string &value);
+    /**
+     * Request reset getter
+     * @return reset attribute
+     */
+    const string &getReset() const;
+    /**
+     * Request reset setter
+     */
+    void setReset(const string &reset);
 
 public:
     string dataType = "";
     string label = "";
     string expression = "";
     string value= "";
+    string reset = "";
 };
 
 

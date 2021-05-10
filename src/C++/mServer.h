@@ -7,6 +7,7 @@
 #include "MemoryMap.h"
 #include "Request.h"
 #include "spdlog/spdlog.h"
+
 using json = nlohmann::json;
 using namespace std;
 using namespace spdlog;

@@ -35,3 +35,11 @@ const string &Request::getValue() const {
 void Request::setValue(const string &value) {
     Request::value = value;
 }
+
+const string &Request::getReset() const {
+    return reset;
+}
+
+void Request::setReset(const string &reset) {
+    Request::reset = reset;
+}
