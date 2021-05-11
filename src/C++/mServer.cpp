@@ -113,6 +113,14 @@ void mServer::sendMessage(string message) {
         ofstream writeJson;
         writeJson.open("../requests.json");
         writeJson << requestsJson;
+
+        std::ifstream readResults("../backupResults.json");
+        json resultsJson;
+        readResults >> resultsJson;
+        resultsJson["Results"].clear();
+        ofstream writeResults;
+        writeResults.open("../backupResults.json");
+        writeResults << resultsJson;
     }
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {

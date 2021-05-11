@@ -43,7 +43,7 @@ void MemoryMap::placePetition(Request request) {
         ifstream requestsFile("../requests.json");
         json allRequests;
         requestsFile >> allRequests;
-        bool flag;
+        bool flag = true;
         for (int i=0; allRequests["Requests"].size()-1 != i; i++) {
             if (allRequests["Requests"][i]["label"] == request.getValue()) {
                 writeJson("print",allRequests["Requests"][i]["value"], "", "", "null");
@@ -53,6 +53,23 @@ void MemoryMap::placePetition(Request request) {
         }
         if (flag) {
             writeJson("print", request.getValue(), "null", "-", "null");
+        }
+    }
+    else if (request.getDataType() == "reference"){
+        ifstream requestsFile("../backupResults.json");
+        json allRequests;
+        requestsFile >> allRequests;
+        bool flag;
+
+        for (int i=0; allRequests["Results"].size()-1 != i; i++) {
+            if (allRequests["Results"][i]["label"] == request.getValue()) {
+                cout << allRequests["Results"][i]["value"];
+                flag = false;
+                break;
+            }
+        }
+        if (flag) {
+            writeJson("Error", "null", "", "-", "null");
         }
     }
 }
