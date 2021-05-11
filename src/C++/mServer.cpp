@@ -106,8 +106,13 @@ void mServer::sendMessage(string message) {
     ofstream reset("../cmake-build-debug/logs/logger.txt");
     reset.clear();
     if (currentRequest->getReset() == "true") {
-        //ofstream reset("../cmake-build-debug/logs/logger.txt");
-        //reset.clear();
+        std::ifstream readRequests("../requests.json");
+        json requestsJson;
+        readRequests >> requestsJson;
+        requestsJson["Requests"].clear();
+        ofstream writeJson;
+        writeJson.open("../requests.json");
+        writeJson << requestsJson;
     }
     int sendRes = send(clientSocket, message.c_str(), message.size() + 1, 0);
     if (sendRes == -1) {
@@ -116,6 +121,7 @@ void mServer::sendMessage(string message) {
 }
 
 void mServer::requestWriter(string message) {
+    cout << "Received: \n" << message << endl;
     json jsonReader = json::parse(message + "\n");
     jsonReader.at("dataType").get_to(this->currentRequest->dataType);
     jsonReader.at("label").get_to(this->currentRequest->label);

@@ -43,23 +43,16 @@ void MemoryMap::placePetition(Request request) {
         ifstream requestsFile("../requests.json");
         json allRequests;
         requestsFile >> allRequests;
-        int lenValue = request.getValue().length();
-        if (lenValue > 1){
-            writeJson("print", request.getValue(), "null", "-", "null");
-
-            //Print que el ide harìa
-            cout << "A print request from IDE";
-            cout << request.getValue() << "\n";
-        }
-        else{
-            for (auto &el : allRequests["Request"].items()) {
-                if (el.value()["label"] == request.getValue()){
-                    writeJson("print", request.getValue(), el.value()["value"], "-", "null");
-
-                    cout << "A print request from IDE";
-                    cout << el.value()["value"] << "\n";
-                }
+        bool flag;
+        for (int i=0; allRequests["Requests"].size()-1 != i; i++) {
+            if (allRequests["Requests"][i]["label"] == request.getValue()) {
+                writeJson("print",allRequests["Requests"][i]["value"], "", "", "null");
+                flag = false;
+                break;
             }
+        }
+        if (flag) {
+            writeJson("print", request.getValue(), "null", "-", "null");
         }
     }
 }
