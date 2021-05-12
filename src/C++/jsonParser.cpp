@@ -34,6 +34,8 @@ void jsonParser::writeJsonBackup(json backupResults) {
     ofstream writeJson;
     writeJson.open("../backupResults.json");
     writeJson <<currentObject;
+
+    writeJson.close();
 }
 
 jsonParser::~jsonParser() {

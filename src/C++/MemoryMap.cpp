@@ -63,9 +63,9 @@ void MemoryMap::placePetition(Request request) {
         requestsFile >> allRequests;
         bool flag;
 
-        for (int i=0; allRequests["Results"].size()-1 != i; i++) {
+        for (int i=0; allRequests["Results"].size() != i; i++) {
             if (allRequests["Results"][i]["label"] == request.getValue()) {
-                cout << allRequests["Results"][i]["value"];
+                cout << "paso\n";
                 string addrValue = allRequests["Results"][i]["memoryAddress"];
                 referenceAllocator(request, addrValue);
                 flag = false;
