@@ -66,6 +66,8 @@ void MemoryMap::placePetition(Request request) {
         for (int i=0; allRequests["Results"].size()-1 != i; i++) {
             if (allRequests["Results"][i]["label"] == request.getValue()) {
                 cout << allRequests["Results"][i]["value"];
+                string addrValue = allRequests["Results"][i]["memoryAddress"];
+                referenceAllocator(request, addrValue);
                 flag = false;
                 break;
             }
@@ -195,7 +197,18 @@ void MemoryMap::structAllocator(const Request &request) {
         int y;
     } claseA;
     cout << "Struct address: "<< &claseA;*/
+void MemoryMap::referenceAllocator(const Request &request, const string addrValue) {
+    int index = data_index[2][1] + data_index[3][1] + 2*data_index[4][1] + 2*data_index[5][1];
 
+    *(a_initializer + index) = 0;
+    cout << "Address ++: " << &(*(a_initializer + index)) << "  Value: " << *(a_initializer + index) << "\n" << endl;
+    ostringstream mem;
+    mem << &(*(a_initializer + index));
+    string address = mem.str();
+    writeJson(address, request.getLabel(), addrValue, "1", logger_manager->readLog());
+    logger_manager->clearLogger();
+    data_index[2][1]++;
+}
 void MemoryMap::freeStorage() {
     free (this->block);
 }

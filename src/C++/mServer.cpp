@@ -130,11 +130,14 @@ void mServer::sendMessage(string message) {
 
 void mServer::requestWriter(string message) {
     cout << "Received: \n" << message << endl;
-    json jsonReader = json::parse(message + "\n");
+    cout << "Debugger parseo";
+    json jsonReader = json::parse(message);
+    cout << "Debugger parseo";
     jsonReader.at("dataType").get_to(this->currentRequest->dataType);
     jsonReader.at("label").get_to(this->currentRequest->label);
     jsonReader.at("expression").get_to(this->currentRequest->expression);
     jsonReader.at("reset").get_to(this->currentRequest->reset);
+
     if (jsonReader["dataType"] == "struct") {
         ofstream writeStruct("../structRequest.json");
         writeStruct << jsonReader;
@@ -156,6 +159,8 @@ void mServer::updateJsonFIle(const json &jsonReader) const {
     ofstream writeJson;
     writeJson.open("../requests.json");
     writeJson <<currentObject;
+
+    writeJson.close();
 }
 
 void mServer::endRun() {

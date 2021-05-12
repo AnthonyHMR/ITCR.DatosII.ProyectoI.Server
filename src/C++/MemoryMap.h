@@ -84,6 +84,7 @@ public:
      * @param request contains the data that has to be allocated in the memory block
      */
     void structAllocator(const Request &request);
+    void referenceAllocator(const Request &request, const string addrValue);
     void freeStorage();
     /**
      * @brief In this method the memory block must manage where is going to
