@@ -11,7 +11,10 @@ void MemoryMap::placePetition(Request request) {
     ifstream structfile ("../structRequest.json");
     json structJson;
     structfile >> structJson;
-    if (request.getDataType() == "int"){
+
+    if(getValue(request.getValue(), request)){
+
+    }else if (request.getDataType() == "int"){
         getLoggerManager()->my_logger->info("An int data type has been allocated");
         intAllocator(request);
     }
@@ -75,6 +78,30 @@ void MemoryMap::placePetition(Request request) {
         if (flag) {
             writeJson("Error", "null", "", "-", logger_manager->readLog());
         }
+    }
+}
+
+bool MemoryMap::getValue(string entry, Request request) {
+    ifstream requestsFile("../requests.json");
+    json allRequests;
+    requestsFile >> allRequests;
+    bool flag = false;
+    for (int i=0; allRequests["Requests"].size()-1 != i; i++) {
+        if (allRequests["Requests"][i]["label"] == entry) {
+            cout << "paso step1\n";
+            for (int j=0; allRequests["Requests"].size()-1 != j; j++) {
+                if (allRequests["Requests"][j]["label"] == allRequests["Requests"][i]["value"] ) {
+                    cout << "paso getValue\n";
+                    flag = true;
+                    break;
+                }
+            }
+        }
+    }
+    if (flag = true){
+        return true;
+    }else {
+        return false;
     }
 }
 

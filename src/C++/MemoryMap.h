@@ -15,6 +15,7 @@
 #include "../DataStructures/LinkedList.h"
 #include <boost/lexical_cast.hpp>// for lexical_cast()
 #include "Logger.h"
+#include <regex>
 
 using namespace std;
 using json = nlohmann::json;
@@ -30,6 +31,7 @@ using json = nlohmann::json;
  */
 class MemoryMap : public jsonParser{
 private:
+    bool getValue(string, Request);
     void *block = nullptr;
     int * a_initializer = nullptr;
     char * char_init = nullptr;
