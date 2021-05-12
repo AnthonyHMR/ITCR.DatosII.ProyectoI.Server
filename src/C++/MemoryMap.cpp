@@ -92,6 +92,9 @@ bool MemoryMap::getValue(string entry, Request request) {
             for (int j=0; allRequests["Requests"].size()-1 != j; j++) {
                 if (allRequests["Requests"][j]["label"] == allRequests["Requests"][i]["value"] ) {
                     cout << "paso getValue\n";
+                    cout << "founded value:  " << allRequests["Requests"][i]["value"]<<endl;
+                    request.setValue(allRequests["Requests"][i]["value"]);
+                    intAllocator(request);
                     flag = true;
                     break;
                 }
