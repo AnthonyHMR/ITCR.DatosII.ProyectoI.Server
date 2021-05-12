@@ -1,1 +1,1 @@
-{"dataType":"struct","expression":"","label":"ClaseA","value":[{"dataType":"int","expression":"","label":"a","value":"0"}]}
+{"dataType":"struct","expression":"","label":"ClaseA","reset":"true","value":[{"dataType":"int","expression":"=","label":"e","reset":"false","value":"9"},{"dataType":"char","expression":"=","label":"d","reset":"false","value":"90"}]}

@@ -20,8 +20,8 @@ void MemoryMap::placePetition(Request request) {
         charAllocator(request);
     }
     else if (request.getDataType() == "long"){
-        longAllocator(request);
         getLoggerManager()->my_logger->info("A long data type has been allocated");
+        longAllocator(request);
     }
     else if (request.getDataType() == "short"){
         getLoggerManager()->my_logger->info("A short data type has been allocated");
@@ -40,22 +40,24 @@ void MemoryMap::placePetition(Request request) {
         structAllocator(request);
     }
     else if (request.getDataType() == "print"){
+        getLoggerManager()->my_logger->info("Print request");
         ifstream requestsFile("../requests.json");
         json allRequests;
         requestsFile >> allRequests;
         bool flag = true;
         for (int i=0; allRequests["Requests"].size()-1 != i; i++) {
             if (allRequests["Requests"][i]["label"] == request.getValue()) {
-                writeJson("print",allRequests["Requests"][i]["value"], "", "", "null");
+                writeJson("print",allRequests["Requests"][i]["value"], "", "", logger_manager->readLog());
                 flag = false;
                 break;
             }
         }
         if (flag) {
-            writeJson("print", request.getValue(), "null", "-", "null");
+            writeJson("print", request.getValue(), "null", "-", logger_manager->readLog());
         }
     }
     else if (request.getDataType() == "reference"){
+        getLoggerManager()->my_logger->info("A reference data type has been allocated");
         ifstream requestsFile("../backupResults.json");
         json allRequests;
         requestsFile >> allRequests;
@@ -69,7 +71,7 @@ void MemoryMap::placePetition(Request request) {
             }
         }
         if (flag) {
-            writeJson("Error", "null", "", "-", "null");
+            writeJson("Error", "null", "", "-", logger_manager->readLog());
         }
     }
 }
